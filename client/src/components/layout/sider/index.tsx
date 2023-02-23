@@ -87,7 +87,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           <CanAccess
             key={route}
             resource={name.toLowerCase()}
-            action="list"
+            action='list'
             params={{
               resource: item,
             }}
@@ -95,7 +95,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             <div key={route}>
               <Tooltip
                 title={label ?? name}
-                placement="right"
+                placement='right'
                 disableHoverListener={!collapsed}
                 arrow
               >
@@ -134,7 +134,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     primary={label}
                     primaryTypographyProps={{
                       noWrap: true,
-                      fontSize: "14px",
+                      fontSize: "16px",
                       fontWeight: isSelected ? "bold" : "normal",
                     }}
                   />
@@ -142,8 +142,8 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                 </ListItemButton>
               </Tooltip>
               {!collapsed && (
-                <Collapse in={open[route || ""]} timeout="auto" unmountOnExit>
-                  <MuiList component="div" disablePadding>
+                <Collapse in={open[route || ""]} timeout='auto' unmountOnExit>
+                  <MuiList component='div' disablePadding>
                     {renderTreeView(children, selectedKey)}
                   </MuiList>
                 </Collapse>
@@ -157,12 +157,12 @@ export const Sider: typeof DefaultSider = ({ render }) => {
         <CanAccess
           key={route}
           resource={name.toLowerCase()}
-          action="list"
+          action='list'
           params={{ resource: item }}
         >
           <Tooltip
             title={label ?? name}
-            placement="right"
+            placement='right'
             disableHoverListener={!collapsed}
             arrow
           >
@@ -178,18 +178,22 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                 py: isNested ? 1.25 : 1,
                 "&.Mui-selected": {
                   "&:hover": {
-                    backgroundColor: "transparent",
+                    backgroundColor: isSelected ? "#1e36e8" : "transparent",
                   },
-                  backgroundColor: "transparent",
+                  backgroundColor: isSelected ? "#475be8" : "transparent",
                 },
                 justifyContent: "center",
+                margin: "10px auto",
+                borderRadius: "12px",
+                minHeight: "56px",
+                width: "90%",
               }}
             >
               <ListItemIcon
                 sx={{
                   justifyContent: "center",
                   minWidth: 36,
-                  color: "primary.contrastText",
+                  color: isSelected ? "#fff" : "#808191",
                 }}
               >
                 {icon ?? <ListOutlined />}
@@ -198,8 +202,10 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                 primary={label}
                 primaryTypographyProps={{
                   noWrap: true,
-                  fontSize: "14px",
+                  fontSize: "16x",
                   fontWeight: isSelected ? "bold" : "normal",
+                  color: isSelected ? "#fff" : "#808191",
+                  marginLeft: "10px",
                 }}
               />
             </ListItemButton>
@@ -210,16 +216,16 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   };
 
   const dashboard = hasDashboard ? (
-    <CanAccess resource="dashboard" action="list">
+    <CanAccess resource='dashboard' action='list'>
       <Tooltip
         title={translate("dashboard.title", "Dashboard")}
-        placement="right"
+        placement='right'
         disableHoverListener={!collapsed}
         arrow
       >
         <ListItemButton
           component={Link}
-          to="/"
+          to='/'
           selected={selectedKey === "/"}
           onClick={() => {
             setOpened(false);
@@ -249,7 +255,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             primary={translate("dashboard.title", "Dashboard")}
             primaryTypographyProps={{
               noWrap: true,
-              fontSize: "14px",
+              fontSize: "16px",
               fontWeight: selectedKey === "/" ? "bold" : "normal",
             }}
           />
@@ -261,20 +267,26 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   const logout = isExistAuthentication && (
     <Tooltip
       title={t("buttons.logout", "Logout")}
-      placement="right"
+      placement='right'
       disableHoverListener={!collapsed}
       arrow
     >
       <ListItemButton
-        key="logout"
+        key='logout'
         onClick={() => mutateLogout()}
-        sx={{ justifyContent: "center" }}
+        sx={{
+          justifyContent: "center",
+          margin: "10px auto",
+          borderRadius: "10px",
+          minHeight: "56px",
+          width: "90%",
+        }}
       >
         <ListItemIcon
           sx={{
             justifyContent: "center",
             minWidth: 36,
-            color: "primary.contrastText",
+            color: "#808191",
           }}
         >
           <Logout />
@@ -283,7 +295,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           primary={t("buttons.logout", "Logout")}
           primaryTypographyProps={{
             noWrap: true,
-            fontSize: "14px",
+            fontSize: "16px",
           }}
         />
       </ListItemButton>
@@ -311,7 +323,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   };
 
   const drawer = (
-    <MuiList disablePadding sx={{ mt: 1, color: "primary.contrastText" }}>
+    <MuiList disablePadding sx={{ mt: 1, color: "#808191" }}>
       {renderSider()}
     </MuiList>
   );
@@ -329,7 +341,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
         }}
       />
       <Box
-        component="nav"
+        component='nav'
         sx={{
           position: "fixed",
           zIndex: 1101,
@@ -338,7 +350,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
         }}
       >
         <Drawer
-          variant="temporary"
+          variant='temporary'
           open={opened}
           onClose={() => setOpened(false)}
           ModalProps={{
@@ -348,7 +360,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             display: { sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               width: 256,
-              bgcolor: "secondary.main",
+              bgcolor: "#fcfcfc",
             },
           }}
         >
@@ -365,13 +377,13 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           {drawer}
         </Drawer>
         <Drawer
-          variant="permanent"
-          PaperProps={{ elevation: 1 }}
+          variant='permanent'
+          PaperProps={{ elevation: 0 }}
           sx={{
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               width: drawerWidth,
-              bgcolor: "secondary.main",
+              bgcolor: "#fcfcfc",
               overflow: "hidden",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
             },
@@ -399,14 +411,17 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           </Box>
           <Button
             sx={{
-              background: "rgba(0,0,0,.5)",
+              background: "#475be8",
               color: "primary.contrastText",
               textAlign: "center",
               borderRadius: 0,
               borderTop: "1px solid #ffffff1a",
+              "&:hover": {
+                bgcolor: "#1e36e8",
+              },
             }}
             fullWidth
-            size="large"
+            size='large'
             onClick={() => setCollapsed((prev) => !prev)}
           >
             {collapsed ? <ChevronRight /> : <ChevronLeft />}
@@ -419,7 +434,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
             top: "64px",
             left: "0px",
             borderRadius: "0 6px 6px 0",
-            bgcolor: "secondary.main",
+            bgcolor: "#475be8",
             zIndex: 1199,
             width: "36px",
           }}

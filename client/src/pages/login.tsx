@@ -12,6 +12,8 @@ export const Login: React.FC = () => {
   const GoogleButton = (): JSX.Element => {
     const divRef = useRef<HTMLDivElement>(null);
 
+    console.log("client_id", process.env.REACT_APP_GOOGLE_CLIENT_ID);
+
     useEffect(() => {
       if (typeof window === "undefined" || !window.google || !divRef.current) {
         return;
