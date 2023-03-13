@@ -3,6 +3,8 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 
 import connectDB from "./mongodb/connect.js";
+import userRoutes from "./routes/user.routes.js";
+import propertyRoutes from "./routes/property.routes.js";
 
 dotenv.config();
 
@@ -14,6 +16,9 @@ app.use(express.json({ limit: "50mb" }));
 app.get("/", (req, res) => {
   res.send({ message: "Hello world!" });
 });
+
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/properties", propertyRoutes);
 
 const startServer = async () => {
   try {

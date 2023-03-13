@@ -14,7 +14,7 @@ const AllProperties = () => {
           All Properties
         </Typography>
         <CustomButton
-          title='All Property'
+          title='Create Property'
           backgroundColor='#475be8'
           color='#fcfcfc'
           icon={<Add />}
