@@ -9,9 +9,11 @@ const CustomButton = ({
   handleClick,
   color,
   fullWidth,
+  disabled,
 }: CustomButtonProps) => {
   return (
     <Button
+      disabled={disabled}
       type={type === "submit" ? "submit" : "button"}
       onClick={handleClick}
       sx={{
